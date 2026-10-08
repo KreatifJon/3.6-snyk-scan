@@ -29,6 +29,10 @@ resource "aws_iam_role_policy_attachment" "lambda_basic" {
 resource "aws_lambda_function" "hello_world" {
   function_name = "plainjon-hello-world"
 
+  tracing_config {
+    mode = "PassThrough"
+  }
+
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
